@@ -1,0 +1,46 @@
+.dock {
+  --base: 64px;
+  --hover-scale: 1.9;
+  --n1-scale: 1.45;
+  --n2-scale: 1.15;
+
+  display: flex;
+  gap: 14px;
+}
+
+.dock-horizontal {
+  flex-direction: row;
+  align-items: flex-end;
+}
+
+.dock-vertical {
+  flex-direction: column;
+  align-items: flex-end;
+}
+
+.dock-item {
+  width: var(--base);
+  height: var(--base);
+  display: block;
+  transition: width 0.25s ease, height 0.25s ease;
+}
+
+/* hovered item */
+.dock-item:hover {
+  width: calc(var(--base) * var(--hover-scale));
+  height: calc(var(--base) * var(--hover-scale));
+}
+
+/* +-1 neighbour */
+.dock-item:has(+ .dock-item:hover),
+.dock-item:hover + .dock-item {
+  width: calc(var(--base) * var(--n1-scale));
+  height: calc(var(--base) * var(--n1-scale));
+}
+
+/* +-2 neighbour */
+.dock-item:has(+ .dock-item + .dock-item:hover),
+.dock-item:hover + .dock-item + .dock-item {
+  width: calc(var(--base) * var(--n2-scale));
+  height: calc(var(--base) * var(--n2-scale));
+}
